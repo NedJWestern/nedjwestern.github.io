@@ -1,0 +1,20 @@
+---
+title: "Hidden test"
+format:
+  html:
+    code-fold: false
+jupyter: python3
+---
+
+
+# Setup {.hidden}
+
+```{python}
+print('foo')
+```
+
+# Graph
+
+```{python}
+print('bar')
+```
