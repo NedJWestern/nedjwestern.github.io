@@ -1,0 +1,43 @@
+<html>
+
+<head>
+  <style>
+    code {
+      font-family: Consolas, "courier new";
+      color: crimson;
+      background-color: #f1f1f1;
+      padding: 2px;
+      font-size: 105%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Hidden sections demo</h1>
+
+  <p>Load in running container</p>
+  <code> podman run --secret TODO type=env my_dotenv,target=/path/to/.env ...</code>
+
+  </div>
+  </p>
+  <details>
+    <summary>Main Section</summary>
+    <p>The secret is loaded into a  is always hidden until clicked.</p>
+    <div>
+      <code>podman secret create</code>
+    </div>
+    <details>
+      <summary>Nested Section</summary>
+      <p>More hidden content nested inside.</p>
+      <div>
+        <code>
+                podman run --secret mysecret,target=/my/location/mysecret
+            </code>
+      </div>
+    </details>
+  </details>
+
+</body>
+
+</html>

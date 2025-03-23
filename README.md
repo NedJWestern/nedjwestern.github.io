@@ -1,3 +1,5 @@
+I can't handle writing in html... need an explore/exploit with markdown
+
 https://pages.github.com/
 
 quarto collapsable section

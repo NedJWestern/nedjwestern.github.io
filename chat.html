@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Podman Secrets</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    header {
+      border-bottom: 2px solid #2c3e50;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+    h1, h2 {
+      color: #2c3e50;
+      margin: 0 0 10px;
+    }
+    h2 {
+      margin-top: 30px;
+    }
+    p {
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+    pre {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      color: crimson;
+      background-color: #f1f1f1;
+      padding: 2px 4px;
+      font-size: 1em;
+      border-radius: 3px;
+    }
+    .command {
+      background-color: #e8e8e8;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0 20px;
+      font-family: Consolas, "Courier New", monospace;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+  </style>
+  </head>
+  <body>
+
+    <header>
+      <h1>Podman Secrets</h1>
+      <p>Manage your secrets with Podman secrets</p>
+    </header>
+
+    <section>
+      <h2>Dotenv File</h2>
+      <p>Given this dotenv (<code>.env</code>) file:</p>
+      <pre>
+<code>#.env
+SECRET1=token1
+SECRET2=token2</code>
+</pre>
+      <p>Create a new Podman secret:</p>
+      <div class="command">
+        <code>$ podman secret create my_dotenv .env</code>
+      </div>
+      <p>View your Podman secrets:</p>
+      <pre><code>$ podman secret ls
+ID                         NAME                 DRIVER      CREATED       UPDATED
+e7647ada09b64a2011b98bf9a  my_dotenv            file        2 months ago  2 months ago</code></pre>
+      <p>Load in running container:</p>
+      <div class="command"><code>$ podman run --secret
+          my_dotenv,target=/path/to/.env ...</code></div>
+    </section>
+
+    <section>
+      <h2>Secret Variable</h2>
+      <p>Your secret variable is already (securely) defined as:
+        <code>MY_SECRET_VAR=var1</code></p>
+      <p>Create a new Podman secret:</p>
+      <div class="command"><code>podman secret create --env=true my_var
+          MY_SECRET_VAR</code></div>
+      <p>View your Podman secrets:</p>
+      <pre><code>$ podman secret ls
+ID                         NAME                 DRIVER      CREATED       UPDATED
+e7647ada09b64a2011b98bf9a  my_dotenv            file        2 months ago  2 months ago</code></pre>
+      <p>Load in running container:</p>
+      <div class="command"><code>$ podman run --secret TODO type=env
+          my_dotenv,target=/path/to/.env ...</code></div>
+    </section>
+
+    <section>
+      <h2>Build Time Secrets</h2>
+      <p>Sometimes you need a secret only for a single step in the image
+        build.</p>
+      <div class="command"><code>$ podman build --secret=id=mysecret,src=.env
+          .</code></div>
+      <p>In the Containerfile, do:</p>
+      <div class="command"><code>RUN --mount=type=secret,id=mysecret cat
+          /run/secrets/mysecret</code></div>
+      <p>Podman only supports secret files here, not variables.</p>
+    </section>
+
+  </body>
+</html>
