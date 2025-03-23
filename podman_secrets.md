@@ -50,7 +50,7 @@ View your Podman secrets:
     ID                         NAME                 DRIVER      CREATED        UPDATED
     0768ad449b71d56d6e65eca34  mysecret2            file        7 seconds ago  7 seconds ago
 
-Note: Here the DRIVER=file does NOT refer to the secret type
+Note: Here the `DRIVER=file` does NOT refer to the secret type
 
 Load in running container:
 
@@ -75,4 +75,4 @@ In the Containerfile, do:
 
 The secret will exist only for this RUN command, it will not persist in the final image.
 
-Podman only supports secret files here, not variables.
+Podman only supports build time secret files, not build time secret variables.
