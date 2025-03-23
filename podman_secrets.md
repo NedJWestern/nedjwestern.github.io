@@ -1,15 +1,12 @@
 ---
-title: "Your Document Title"
+title: "Podman Secrets"
 css: custom.css
 ---
 
-# Podman Secrets
-
 Manage your secrets with Podman secrets
-    
 
     
-## Dotenv File
+## Dotenv Secrets File
 
 Given this dotenv (.env) file:
       
@@ -27,7 +24,7 @@ View your Podman secrets:
     ID                         NAME                DRIVER      CREATED        UPDATED
     e7647ada09b64a2011b98bf9a  mysecret            file        7 seconds ago  7 seconds ago
 
-Unfortunately, Podman does not offer a way to directly inspect the contents of a secret. Use a disposable container for this purpose. Warning: this is not considered secure.
+Inspect your secret. Unfortunately, Podman does not offer a direct way to do this, so use a disposable container. Warning: this is not considered secure.
 
     $ podman run --rm --secret mysecret docker.io/library/alpine:latest cat /run/secrets/mysecret
 
@@ -55,7 +52,7 @@ View your Podman secrets:
     ID                         NAME                 DRIVER      CREATED        UPDATED
     0768ad449b71d56d6e65eca34  mysecret2            file        7 seconds ago  7 seconds ago
 
-Note: Here the `DRIVER=file` does NOT refer to the secret type
+Note: Here the `DRIVER=file` does NOT refer to the secret `type`.
 
 Load in running container:
 
