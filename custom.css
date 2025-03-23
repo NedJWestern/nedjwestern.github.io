@@ -1,0 +1,68 @@
+/* custom.css */
+
+/* Base styling */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #343a40;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 1em;
+}
+
+/* Code blocks and inline code */
+pre, code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #e9ecef;
+  padding: 0.5em;
+  border-radius: 4px;
+}
+
+/* Inline code specifics */
+code {
+  padding: 0 4px;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 2em;
+  margin-bottom: 1em;
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  background-color: #f1f3f5;
+  border-left: 4px solid #dee2e6;
+}
+
+/* Horizontal rules */
+hr {
+  border: 0;
+  height: 1px;
+  background: #dee2e6;
+  margin: 2em 0;
+}

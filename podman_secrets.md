@@ -1,3 +1,8 @@
+---
+title: "Your Document Title"
+css: custom.css
+---
+
 # Podman Secrets
 
 Manage your secrets with Podman secrets
@@ -15,7 +20,7 @@ Given this dotenv (.env) file:
 Create a new Podman secret:
       
     $ podman secret create mysecret .env
-      
+
 View your Podman secrets:
 
     $ podman secret ls
