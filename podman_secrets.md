@@ -80,14 +80,14 @@ Your secret variable is already (securely) defined as:
 
 Create a new Podman secret:
 
-    podman secret create --env=true mysecret2 MYVAR
+    podman secret create --env=true myvar MYVAR
 
 <details>
 <summary>List your Podman secrets:</summary>
 
     $ podman secret ls
     ID                         NAME                 DRIVER      CREATED        UPDATED
-    0768ad449b71d56d6e65eca34  mysecret2            file        7 seconds ago  7 seconds ago
+    0768ad449b71d56d6e65eca34  myvar            file        7 seconds ago  7 seconds ago
 
 Note: Here the `DRIVER=file` does NOT refer to the secret `type`.
 
@@ -99,7 +99,7 @@ Load in running container:
 TODO check
 
     $ podman run --secret=id=MYVAR ...
-    $ podman run --secret=id=mysecret2,type=env ...
+    $ podman run --secret=id=myvar,type=env ...
     
 Not working
 
