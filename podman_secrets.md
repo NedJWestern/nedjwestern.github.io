@@ -1,6 +1,10 @@
 ---
-title: "Podman Secrets"
-css: custom.css
+layout: post
+title: "Securing Container Workflows: A Guide to Podman Secrets"
+date: 2026-02-03
+categories: [DevOps, Security]
+tags: [podman, containers, linux]
+description: "The TL;DR of using Podman's native secrets engine."
 ---
 
 Manage your secrets with Podman secrets
