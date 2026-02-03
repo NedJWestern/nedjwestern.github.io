@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: base
 title: Creating Podman Secrets
 ---
 
