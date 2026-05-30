@@ -9,3 +9,4 @@ fi
 
 podman run --rm -v "$(pwd)":/data:Z docker.io/pandoc/core /data/"$1" --toc -s -o "$1".html
 
+echo Build complete for: $1
