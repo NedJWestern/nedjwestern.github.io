@@ -3,18 +3,20 @@ layout: base
 title: Creating Podman Secrets
 ---
 
-Manage your secrets with Podman secrets
+A Podman secret is a blob of sensitive data — a token, password, or credentials file — managed by Podman rather than baked into your image or passed as a plain environment variable. Secrets can be mounted into containers at run time or injected into a single build step without persisting in the final image.
 
 
-# Run time secrets
+# Runtime secrets
     
 ## Secret File
 
 Your secrets are in a dotenv (.env) file:
       
-    #.env
-    SECRET1=token1
-    SECRET2=token2
+```
+#.env
+SECRET1=token1
+SECRET2=token2
+```
 
 
 <details>
@@ -23,14 +25,18 @@ A secret is a blob of sensitive data, managed by Podman, which a container needs
 </details>
 
       
-    $ podman secret create mydotenv .env
+```bash
+podman secret create mydotenv .env
+```
 
 <details>
 <summary>List your Podman secrets:</summary>
 
-    $ podman secret ls
-    ID                         NAME                DRIVER      CREATED        UPDATED
-    e7647ada09b64a2011b98bf9a  mydotenv            file        7 seconds ago  7 seconds ago
+```bash
+$ podman secret ls
+ID                         NAME                DRIVER      CREATED        UPDATED
+e7647ada09b64a2011b98bf9a  mydotenv            file        7 seconds ago  7 seconds ago
+```
 
 </details>
 
@@ -38,14 +44,18 @@ A secret is a blob of sensitive data, managed by Podman, which a container needs
 <summary>Inspect your secret's contents:</summary>
 Unfortunately, Podman does not offer a direct way to do this, so use a disposable container. Warning: this is not secure.
 
-    $ podman run --rm --secret mydotenv docker.io/library/alpine:latest cat /run/secrets/mydotenv
+```bash
+podman run --rm --secret mydotenv docker.io/library/alpine:latest cat /run/secrets/mydotenv
+```
 
 </details>
 
 
 Load into a running container, to a file named `.env`:
 
-    $ podman run --secret mydotenv,target=/path/to/.env ...
+```bash
+podman run --secret mydotenv,target=/path/to/.env ...
+```
     
 <details>
 <summary>Options:</summary>
@@ -53,19 +63,25 @@ Load into a running container, to a file named `.env`:
 The default target is a file at `/run/secrets/mydotenv`
 
 
-    $ podman run --secret mydotenv ...
+```bash
+podman run --secret mydotenv ...
+```
 
 
 Change the file permissions
 
 
-    $ podman run --secret mydotenv,target=/path/to/.env,mode=0777 ...
+```bash
+podman run --secret mydotenv,target=/path/to/.env,mode=0777 ...
+```
 
 
 Since `type` is `mount` by default, this argument is redundant
 
 
-    $ podman run --secret mydotenv,type=mount,target=/path/to/.env ...
+```bash
+podman run --secret mydotenv,type=mount,target=/path/to/.env ...
+```
 
 
 </details>
@@ -80,14 +96,18 @@ Your secret variable is already (securely) defined as:
 
 Create a new Podman secret:
 
-    podman secret create --env=true myvar MYVAR
+```bash
+podman secret create --env=true myvar MYVAR
+```
 
 <details>
 <summary>List your Podman secrets:</summary>
 
-    $ podman secret ls
-    ID                         NAME                 DRIVER      CREATED        UPDATED
-    0768ad449b71d56d6e65eca34  myvar            file        7 seconds ago  7 seconds ago
+```bash
+$ podman secret ls
+ID                         NAME                 DRIVER      CREATED        UPDATED
+0768ad449b71d56d6e65eca34  myvar            file        7 seconds ago  7 seconds ago
+```
 
 Note: Here the `DRIVER=file` does NOT refer to the secret `type`.
 
@@ -98,13 +118,16 @@ Load in running container:
 
 TODO check
 
-    $ podman run --secret=id=MYVAR ...
-    $ podman run --secret=id=myvar,type=env ...
+```bash
+podman run --secret=id=MYVAR ...
+podman run --secret=id=myvar,type=env ...
+```
     
 Not working
 
-    $ podman run --rm --secret drefs_pg_pword,type=env,target=MY_SECRET docker.io/library/alpine:latest echo $MY_SECRET
-
+```bash
+podman run --rm --secret drefs_pg_pword,type=env,target=MY_SECRET docker.io/library/alpine:latest echo $MY_SECRET
+```
 
 # Build Time Secrets
 
@@ -119,11 +142,15 @@ E.g. you need to access an internal package repository during build time and you
 
 Pass in the secret file:
 
-    $ podman build --secret=id=mydotenv,src=.env ...
+```bash
+podman build --secret=id=mydotenv,src=.env ...
+```
 
 In the Containerfile, do:
 
-    RUN --mount=type=secret,id=mydotenv,target=/path/to/.env cat /path/to/.env
+```Dockerfile
+RUN --mount=type=secret,id=mydotenv,target=/path/to/.env cat /path/to/.env
+```
 
 The secret will exist only for this RUN command, it will not persist in the final image.
 
@@ -134,11 +161,15 @@ Note: changing the contents of secret files will not trigger a rebuild of layers
 
 Pass in the secret variable:
 
-    $ podman build --secret=id=myvar,env=MYVAR ...
+```bash
+podman build --secret=id=myvar,env=MYVAR ...
+```
 
 In the Containerfile:
 
-    RUN --mount=type=secret,id=myvar cat /run/secrets/myvar
+```Dockerfile
+RUN --mount=type=secret,id=myvar cat /run/secrets/myvar
+```
 
 <details>
 <summary>
@@ -146,11 +177,15 @@ Note: this is loaded as a file, not a variable
 </summary>
 In Docker you can do
 
-    RUN --mount=type=secret,id=myvar,env=SECRET_TOKEN echo $SECRET_TOKEN
+```Dockerfile
+RUN --mount=type=secret,id=myvar,env=SECRET_TOKEN echo $SECRET_TOKEN
+```
 
 This is not supported in Podman. As a workaround, do:
 
-    RUN --mount=type=secret,id=myvar,env=SECRET_TOKEN echo $(cat /run/secrets/myvar)
+```Dockerfile
+RUN --mount=type=secret,id=myvar,env=SECRET_TOKEN echo $(cat /run/secrets/myvar)
+```
 
 </details>
 
