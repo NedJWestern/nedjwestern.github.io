@@ -132,9 +132,11 @@ podman run --rm --secret drefs_pg_pword,type=env,target=MY_SECRET docker.io/libr
 
 ## Secret File
 
+In this case, you need a secret only for a single step in the image build. 
+
 <details markdown="1">
 <summary>
-Sometimes you need a secret only for a single step in the image build. 
+E.g.
 </summary>
 E.g. you need to access an internal package repository during build time and you don't want those credentials in the final image.
 </details>
