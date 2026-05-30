@@ -33,11 +33,9 @@ podman secret create mydotenv .env
 <details>
 <summary>List your Podman secrets:</summary>
 
-```bash
-$ podman secret ls
-ID                         NAME                DRIVER      CREATED        UPDATED
-e7647ada09b64a2011b98bf9a  mydotenv            file        7 seconds ago  7 seconds ago
-```
+    $ podman secret ls
+    ID                         NAME                DRIVER      CREATED        UPDATED
+    e7647ada09b64a2011b98bf9a  mydotenv            file        7 seconds ago  7 seconds ago
 
 </details>
 
