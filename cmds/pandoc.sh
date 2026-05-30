@@ -7,4 +7,5 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-podman run --rm -v "$(pwd)":/data:Z  pandoc/core /data/"$1" --toc -s -o "$1".html
+podman run --rm -v "$(pwd)":/data:Z docker.io/pandoc/core /data/"$1" --toc -s -o "$1".html
+
