@@ -20,7 +20,7 @@ SECRET2=token2
 ```
 
 
-<details>
+<details markdown="1">
 <summary>Create a new "Podman secret":</summary>
 A secret is a blob of sensitive data, managed by Podman, which a container needs at runtime but is not stored in the image. Replace `mydotenv` with your name of the secret.
 </details>
@@ -30,7 +30,7 @@ A secret is a blob of sensitive data, managed by Podman, which a container needs
 podman secret create mydotenv .env
 ```
 
-<details>
+<details markdown="1">
 <summary>List your Podman secrets:</summary>
 
     $ podman secret ls
@@ -39,7 +39,7 @@ podman secret create mydotenv .env
 
 </details>
 
-<details>
+<details markdown="1">
 <summary>Inspect your secret's contents:</summary>
 Unfortunately, Podman does not offer a direct way to do this, so use a disposable container. Warning: this is not secure.
 
@@ -56,7 +56,7 @@ Load into a running container, to a file named `.env`:
 podman run --secret mydotenv,target=/path/to/.env ...
 ```
     
-<details>
+<details markdown="1">
 <summary>Options:</summary>
 
 The default target is a file at `/run/secrets/mydotenv`
@@ -99,7 +99,7 @@ Create a new Podman secret:
 podman secret create --env=true myvar MYVAR
 ```
 
-<details>
+<details markdown="1">
 <summary>List your Podman secrets:</summary>
 
 ```bash
@@ -132,7 +132,7 @@ podman run --rm --secret drefs_pg_pword,type=env,target=MY_SECRET docker.io/libr
 
 ## Secret File
 
-<details>
+<details markdown="1">
 <summary>
 Sometimes you need a secret only for a single step in the image build. 
 </summary>
@@ -170,7 +170,7 @@ In the Containerfile:
 RUN --mount=type=secret,id=myvar cat /run/secrets/myvar
 ```
 
-<details>
+<details markdown="1">
 <summary>
 Note: this is loaded as a file, not a variable
 </summary>
@@ -189,7 +189,7 @@ RUN --mount=type=secret,id=myvar,env=SECRET_TOKEN echo $(cat /run/secrets/myvar)
 </details>
 
 
-<details>
+<details markdown="1">
 <summary>
 concise
 </summary>
