@@ -1,6 +1,7 @@
 ---
-layout: base
-title: Creating Podman Secrets
+layout: default
+title: Podman Secrets
+nav_order: 2
 ---
 
 A Podman secret is a blob of sensitive data — a token, password, or credentials file — managed by Podman rather than baked into your image or passed as a plain environment variable. Secrets can be mounted into containers at run time or injected into a single build step without persisting in the final image.

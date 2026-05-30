@@ -1,0 +1,21 @@
+details {
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 0.8rem;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: $link-color;
+    padding: 0.2rem 0;
+
+    &:hover {
+      color: $link-color-visited;
+    }
+  }
+
+  &[open] summary {
+    margin-bottom: 0.4rem;
+  }
+}
