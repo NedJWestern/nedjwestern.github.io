@@ -1,6 +1,6 @@
 # SSH images server
 
-You have only a SSH connection to a remote Linux server. During exploratory data analysis, you need a convenient, mouse-free way to update and view plots.
+You have only a SSH connection to a remote Linux server. During exploratory data analysis, you need a convenient, mouse-free way to view and update plots.
 
 Pros
 - Update your image mouse-free.
@@ -9,17 +9,17 @@ Pros
 
 In your SSH connection, forward a port like so
 ```bash
-ssh -L 8988:localhost:8988 your_user_name@your_server
+ssh -L 8000:localhost:8000 your_user_name@your_server
 ```
 
 On the remote server, create a [HTTP server](https://docs.python.org/3/library/http.server.html) to server your directory
 ```bash
-python -m http.server 8988
+python -m http.server
 ```
 
-Or set a particular directory with
+Or change the directory and default port number
 ```bash
---directory tmp/
+python -m http.server --directory tmp/ 8988
 ```
 
 Use `mpld3` to save `matplotlib` images as interactive html files.
@@ -30,7 +30,6 @@ plt.close()
 ```
 
 View your images locally in a browser at
-
 ```
-localhost:8988
+localhost:8000
 ```
