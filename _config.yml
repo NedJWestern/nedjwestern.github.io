@@ -5,3 +5,4 @@ title: Ned's TIL
 description: Tutorials on Python, R and Podman
 color_scheme: dark
 search_enabled: true
+nav_sort: case_insensitive

@@ -18,9 +18,8 @@ SECRET1=token1
 SECRET2=token2
 ```
 
-Create a new "Podman secret"
+Create a new Podman secret
 
-      
 ```bash
 podman secret create your_dotenv .env
 ```
@@ -38,7 +37,7 @@ Load into a running container, to a file named `.env`
 ```bash
 podman run --secret your_dotenv,target=/path/to/.env ...
 ```
-    
+
 <details markdown="1">
 <summary>File Examples</summary>
 
@@ -66,10 +65,7 @@ Since `type` is `mount` by default, this argument is redundant
 podman run --rm --secret your_dotenv,type=mount,target=/path/to/.env docker.io/library/alpine:latest cat /path/to/.env
 ```
 
-
 </details>
-
-
 
 ## Secret Variable
 
@@ -98,7 +94,6 @@ Note: Here the `DRIVER=file` does NOT refer to the secret `type`.
 
 </details>
 
-
 Load into running container
 
 ```bash
@@ -107,7 +102,6 @@ podman run --secret your_var,type=env,target=YOUR_VAR_TARGET ...
 
 <details markdown="1">
 <summary>Variable Examples</summary>
-
 
 Define a custom target variable name
 ```bash
@@ -148,7 +142,6 @@ The secret will exist only for this single RUN command, it will not persist in t
 
 Note: changing the contents of secret files will not trigger a rebuild of layers that use said secrets. So if you change the contents of the secret file, add the `--no-cache` argument to force reloading the secrets.
 
-
 ## Secret Variable
 
 Pass in the secret variable
@@ -167,12 +160,8 @@ RUN --mount=type=secret,id=your_var cat /run/secrets/your_var
 
 Note: In Podman, build time secrets can be loaded as files only, not environment variables. As a workaround, do:
 
-
 ```Dockerfile
 RUN --mount=type=secret,id=your_var \
     export MY_VAR=$(cat /run/secrets/your_var) \
     && echo $MY_VAR
 ```
-
-
-

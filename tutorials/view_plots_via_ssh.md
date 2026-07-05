@@ -20,7 +20,7 @@ On the remote server, `cd` to your plots directory and create a [HTTP server](ht
 python -m http.server
 ```
 
-Or set the directory and default port number
+Or, to skip the `cd` step, point the server directly at your plots directory (adjust your saved plot paths to match)
 ```bash
 python -m http.server --directory tmp/ 8000
 ```
