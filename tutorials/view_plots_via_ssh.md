@@ -28,7 +28,7 @@ python -m http.server --directory tmp/ 8000
 Use `mpld3` to save `matplotlib` images as interactive html files.
 ```python
 df.plot()
-mpld3.save_html(plt.gcf(), "tmp/plots/plot.html")
+mpld3.save_html(plt.gcf(), "plot.html")
 plt.close()
 ```
 
