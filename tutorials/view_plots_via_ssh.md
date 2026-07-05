@@ -3,7 +3,7 @@ layout: default
 title: View Plots via SSH
 ---
 
-You have only an SSH connection to a remote Linux server. During exploratory data analysis, you need a convenient, mouse-free way to view and update plots.
+You have only an SSH connection to a remote Linux server. During exploratory data analysis, you need a convenient, mouse-free way to update and view plots.
 
 Pros
 - Update your image mouse-free.

@@ -1,7 +1,7 @@
 remote_theme: just-the-docs/just-the-docs
 plugins:
   - jekyll-remote-theme
-title: Ned's Tutorials
-description: Tutorials on Podman, Python, and R
+title: Ned's TIL
+description: Tutorials on Python, R and Podman
 color_scheme: dark
 search_enabled: true
