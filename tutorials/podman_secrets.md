@@ -1,18 +1,17 @@
 ---
 layout: default
 title: Podman Secrets
-nav_order: 2
 ---
 
 A Podman secret is a blob of sensitive data — a token, password, or credentials file — managed by Podman rather than baked into your image or passed as a plain environment variable. Secrets can be mounted into containers at runtime or injected into a single build step without persisting in the final image.
 
 
-# Runtime secrets
-    
+# Runtime Secrets
+
 ## Secret File
 
 Your secrets are in a dotenv (.env) file
-      
+
 ```
 #.env
 SECRET1=token1
@@ -34,9 +33,6 @@ ID                         NAME                DRIVER      CREATED        UPDATE
 e7647ada09b64a2011b98bf9a  your_dotenv         file        7 seconds ago  7 seconds ago
 ```
 
-
-
-
 Load into a running container, to a file named `.env`
 
 ```bash
@@ -44,7 +40,7 @@ podman run --secret your_dotenv,target=/path/to/.env ...
 ```
     
 <details markdown="1">
-<summary>Examples</summary>
+<summary>File Examples</summary>
 
 Sensible defaults
 
@@ -61,7 +57,7 @@ podman run --rm --secret your_dotenv docker.io/library/alpine:latest cat /run/se
 Change the file permissions
 
 ```bash
-podman run --rm --secret your_dotenv,target=/path/to/.env,mode=0777 docker.io/library/alpine:latest ls -al /path/to
+podman run --rm --secret your_dotenv,target=/path/to/.env,mode=0400 docker.io/library/alpine:latest ls -al /path/to
 ```
 
 Since `type` is `mount` by default, this argument is redundant
@@ -79,7 +75,9 @@ podman run --rm --secret your_dotenv,type=mount,target=/path/to/.env docker.io/l
 
 Your secret variable is already (securely) defined as
 
-    YOUR_VAR=token1
+```bash
+YOUR_VAR=token1
+```
 
 Create a new Podman secret
 
@@ -108,7 +106,7 @@ podman run --secret your_var,type=env,target=YOUR_VAR_TARGET ...
 ```
 
 <details markdown="1">
-<summary>Examples</summary>
+<summary>Variable Examples</summary>
 
 
 Define a custom target variable name
