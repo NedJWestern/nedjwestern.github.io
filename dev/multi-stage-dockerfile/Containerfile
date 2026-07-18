@@ -1,0 +1,11 @@
+FROM docker.io/library/alpine:latest as base
+
+RUN echo Base stage
+
+FROM base AS qa
+
+RUN echo QA stage
+
+FROM base AS prod
+
+RUN echo Production stage
